@@ -9,20 +9,28 @@ from .theme import colors
 # Layouts and layout rules
 
 
-layout_conf = {
-    'border_focus': colors['focus'][0],
-    'border_width': 13,
-    'margin': 13
+layout_conf_withBorder = {
+    'border_focus': colors['inactive'][0],
+    'border_normal': colors['dark'][0],
+    'border_width': 3,
+    'margin': 10,
+}
+
+layout_conf_withoutBorder = {
+    'border_focus': colors['inactive'][0],
+    'border_normal': colors['dark'][0],
+    'border_width': 0,
+    'margin': 0,
 }
 
 layouts = [
-    layout.Max(),
+    layout.Max(**layout_conf_withoutBorder),
     #layout.MonadTall(**layout_conf),
     #layout.MonadWide(**layout_conf),
     #layout.Bsp(**layout_conf),
     #layout.Matrix(columns=2, **layout_conf),
     #layout.RatioTile(**layout_conf),
-    layout.Columns(),
+    layout.Columns(**layout_conf_withBorder),
     # layout.Tile(),
     # layout.TreeTab(),
     # layout.VerticalTile(),
@@ -39,5 +47,5 @@ floating_layout = layout.Floating(
         Match(title='branchdialog'),
         Match(title='pinentry'),
     ],
-    border_focus=colors["color3"][0]
+    border_focus=colors["color1"][0]
 )

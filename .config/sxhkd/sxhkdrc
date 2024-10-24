@@ -1,0 +1,47 @@
+# brightness keys
+XF86MonBrightnessUp
+	/home/manueld1az/.local/bin/backlight up
+
+XF86MonBrightnessDown
+	/home/manueld1az/.local/bin/backlight down
+
+# printscreen
+@Print
+  screenshot
+
+shift + @Print
+  screenshot select
+
+# media keys
+XF86AudioPrev
+	playerctl previous
+
+XF86AudioNext
+	playerctl next
+
+XF86AudioPlay
+	playerctl play-pause
+
+# volume keys
+XF86AudioRaiseVolume
+	/home/manueld1az/.local/bin/volume up
+
+XF86AudioLowerVolume
+	/home/manueld1az/.local/bin/volume down
+
+XF86AudioMute
+	/home/manueld1az/.local/bin/volume mute
+
+# notifications
+ctrl + space
+  dunstctl close
+
+ctrl + shift + space
+  dunstctl close-all
+
+ctrl + shift + period
+  dunstctl context
+
+ctrl + grave
+  dunstctl history-pop
+

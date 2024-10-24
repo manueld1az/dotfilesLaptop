@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Función para enviar la notificación del volumen
+function send_notification() {
+    volume=$(pamixer --get-volume)
+    dunstify -a "volume" -u low -r "9993" -h int:value:"$volume" -i "volume-$1" "${volume}%" -t 1000
+}
+
+# Limitar el volumen máximo permitido
+MAX_VOLUME=100
+
+# Obtener el volumen actual
+current_volume=$(pamixer --get-volume)
+
+case $1 in
+    up)
+        # Comprobar si el volumen actual es menor que el volumen máximo
+        if [ "$current_volume" -lt "$MAX_VOLUME" ]; then
+            pamixer -u 
+            pamixer -i 10 --allow-boost 
+            send_notification $1
+        #else
+            #dunstify -a "volume" -u low -r "9993" -i "volume-high" "Volumen máximo alcanzado (${MAX_VOLUME}%)" -t 1000
+        fi
+        ;;
+    down)
+        pamixer -u 
+        pamixer -d 10 --allow-boost 
+        send_notification $1
+        ;;
+    mute)
+        pamixer -t
+        if $(pamixer --get-mute); then
+            send_notification $1
+        else
+            send_notification up 
+        fi
+        ;;
+esac
+

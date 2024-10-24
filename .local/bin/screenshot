@@ -1,0 +1,11 @@
+#! /bin/sh
+
+output = '%a-%d-%b-%y_%H:%M:%S_$wx$h.png'
+exec = 'mv $f ~/pictures/screenshots'
+
+case "$1" in
+        "select") scrot "$output" -zse "$exec" || exit;;
+        *) scrot "$output" -ze "exec" || exit;;
+esac
+
+notify-send "Screenshot taken."

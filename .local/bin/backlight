@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Función para enviar notificación del brillo actual
+send_notification() {
+    # Obtenemos el porcentaje de brillo actual usando brightnessctl get
+    current_brightness=$(brightnessctl -m | awk -F, '{print $4}' | tr -d '%')
+    dunstify -a "backlight" -u low -r 9994 -h int:value:"$current_brightness" -i "brightness" "$current_brightness%" -t 1000
+}
+
+# Verificamos si el argumento es 'up' o 'down' para ajustar el brillo
+case $1 in
+    up)
+        brightnessctl set 1%+  # Aumentamos el brillo en %
+        send_notification      # Enviamos la notificación con el brillo actualizado
+        ;;
+    down)
+        brightnessctl set 1%-  # Disminuimos el brillo en %
+        send_notification      # Enviamos la notificación con el brillo actualizado
+        ;;
+    *)
+        echo "Uso: $0 {up|down}"  # Si no hay argumento válido, mostramos el uso
+        ;;
+esac
+

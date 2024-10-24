@@ -1,10 +1,12 @@
+# Este archivo te puede causar problemas con los ratones de cualquier tipo.
+
 from libqtile.config import Drag, Click
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 from .keys import mod
 
 
-mouse = [
-    Drag(
+mouse = []
+"""    Drag(
         [mod],
         "Button1",
         lazy.window.set_position_floating(),
@@ -17,4 +19,4 @@ mouse = [
         start=lazy.window.get_size()
     ),
     Click([mod], "Button2", lazy.window.bring_to_front())
-]
+]"""

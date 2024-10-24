@@ -1,0 +1,17 @@
+#redshift &
+#setxkbmap en &
+#udiskie -t &
+#picom &
+feh --bg-scale --randomize /home/manueld1az/Wallpapers/* &
+#dunst -q &
+sxhkd &
+dunst &
+setxkbmap -option "compose:ralt"
+# Asigna la tecla derecha "Alt" (Alt_R) como la tecla Compose o tambien conocida en teclados de E.E.U.U como la tecla AltGr.
+# Esto significa que al presionar la tecla derecha "Alt" y luego presionar una secuencia específica de teclas, podrás ingresar caracteres especiales y símbolos compuestos.
+
+#invierte el sonido para usar los auriculares del celular
+#pacmd load-module module-remap-sink sink_name=reverse-stereo master=1 channels=2 master_channel_map=front-right,front-left channel_map=front-left,front-right
+export QT_QPA_PLATFORMTHEME=qt5ct
+# program for new keybinds for operating system
+autokey-gtk &

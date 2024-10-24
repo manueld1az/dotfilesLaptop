@@ -5,7 +5,7 @@
 # Qtile keybindings
 
 from libqtile.config import Key
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 
 
 mod = "mod4"
@@ -22,11 +22,14 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod, "shift"], "space", lazy.layout.previous()),
 
     # Change window sizes (MonadTall)
-    #([mod, "shift"], "l", lazy.layout.grow()),
-    #([mod, "shift"], "h", lazy.layout.shrink()),
+    ([mod, "shift"], "l", lazy.layout.grow()),
+    ([mod, "shift"], "h", lazy.layout.shrink()),
 
     # Toggle floating
     ([mod, "shift"], "f", lazy.window.toggle_floating()),
+
+    # Hide or show the staus bar
+    ([mod], "t", lazy.hide_show_bar(position="top")),
 
     # Move windows up or down in current stack
     ([mod, "shift"], "j", lazy.layout.shuffle_down()),
@@ -46,7 +49,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod, "shift"], "Tab", lazy.prev_layout()),
 
     # Kill window
-    ([mod], "w", lazy.window.kill()),
+    ([mod, "control"], "w", lazy.window.kill()),
 
     # Switch focus of monitors
     ([mod], "period", lazy.next_screen()),
@@ -55,7 +58,7 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     # Restart Qtile
     ([mod, "control"], "r", lazy.restart()),
 
-    ([mod, "control"], "q", lazy.shutdown()),
+    ([mod, "control"], "t", lazy.shutdown()),
     ([mod], "r", lazy.spawncmd()),
 
     # --- Launch programs ---
@@ -68,39 +71,31 @@ keys = [Key(key[0], key[1], *key[2:]) for key in [
     ([mod, "shift"], "m", lazy.spawn("rofi -show")),
 
     # Browser
-    #([mod], "b", lazy.spawn("firefox")),
     ([mod], "b", lazy.spawn("brave")),
 
     # File Explorer
-    #([mod], "e", lazy.spawn("thunar")),
-    ([mod], "e", lazy.spawn("pcmanfm")),
+    ([mod], "e", lazy.spawn("thunar")),
 
     # Terminal
-    #([mod], "Return", lazy.spawn("kitty")),
-    ([mod], "Return", lazy.spawn("alacritty")),
+    # ([mod], "Return", lazy.spawn("Alacritty")),
+    ([mod], "Return", lazy.spawn("kitty")),
 
     # Redshift
     #([mod], "r", lazy.spawn("redshift -O 2400")),
     #([mod, "shift"], "r", lazy.spawn("redshift -x")),
 
     # Screenshot
-    ([mod], "s", lazy.spawn("scrot")),
-    ([mod, "shift"], "s", lazy.spawn("scrot -s")),
+    ([mod], "s", lazy.spawn("scrot '%a-%d-%b-%y_%H:%M:%S_$wx$h.png' -ze 'mv $f ~/pictures/screenshots'")),
+    ([mod, "shift"], "s", lazy.spawn("scrot -s '%a-%d-%b-%y_%H:%M:%S_$wx$h.png' -ze 'mv $f ~/pictures/screenshots'")),
 
     # ------------ Hardware Configs ------------
 
     # Volume
-    ([], "XF86AudioLowerVolume", lazy.spawn(
-        "pactl set-sink-volume @DEFAULT_SINK@ -5%"
-    )),
-    ([], "XF86AudioRaiseVolume", lazy.spawn(
-        "pactl set-sink-volume @DEFAULT_SINK@ +5%"
-    )),
-    ([], "XF86AudioMute", lazy.spawn(
-        "pactl set-sink-mute @DEFAULT_SINK@ toggle"
-    )),
+    #([], "XF86AudioLowerVolume", lazy.spawn("~/changevolume down")),
+    #([], "XF86AudioRaiseVolume", lazy.spawn("/home/manueld1az/changevolume up")),
+    #([], "XF86AudioMute", lazy.spawn("~/changevolume mute")),
 
     # Brightness if you use a laptop
-    ([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +1%")),
-    ([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 1%-")),
+    #([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%")),
+    #([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
 ]]
